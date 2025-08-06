@@ -19,8 +19,10 @@
       "extensions": [
         "GitHub.copilot",
         "golang.go",
+        "kangping.protobuf",
         "ms-vscode.cpptools",
-        "ms-vscode.makefile-tools"
+        "ms-vscode.makefile-tools",
+        "plex.vscode-protolint"
       ]
     }
   }
