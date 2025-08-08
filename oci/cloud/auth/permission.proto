@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package oci.cloud.permission;
+
+import "oci/cloud/operation/operation.proto";
+
+option go_package = "github.com/open-cloud-initiative/go-genproto/oci/cloud/auth;auth";
+
+// Auth service a set of methods for getting information about permissions.
+service Auth {
+  rpc GetPermission(GetPermission) returns (Permission) {
+    option (google.api.http) = {get: "/auth/{permission}"};
+  }
+}
+
+// Permission represents a permission in the system.
+message Permission {
+  // Name of the permission.
+  string name = 1;
+  // Description of the permission.
+  string description = 2;
+  // List of actions that can be performed with this permission.
+  repeated string actions = 3;
+}
+
+// GetPermission is the request message for the GetPermission RPC.
+message GetPermission {
+  // The name of the permission to retrieve.
+  string permission = 1 [
+    (required) = true,
+    (length) = "<=128"
+  ];
+}
