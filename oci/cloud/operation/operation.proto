@@ -6,7 +6,7 @@ import "google/protobuf/any.proto";
 import "google/protobuf/timestamp.proto";
 import "google/rpc/status.proto";
 
-option go_package = "github.com/open-cloud-initiative/go-genproto/oci/cloud/operation;operation";
+option go_package = "github.com/open-cloud-initiative/specs/gen/go/operation;operation";
 
 // An Operation resource.
 message Operation {

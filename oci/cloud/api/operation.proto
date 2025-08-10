@@ -2,12 +2,13 @@ syntax = "proto3";
 
 package oci.cloud.api;
 
+import "google/api/annotations.proto";
 import "google/protobuf/descriptor.proto";
 
-option go_package = "github.com/open-cloud-initiative/go-genproto/oci/cloud/api;api";
+option go_package = "github.com/open-cloud-initiative/specs/gen/go/api;api";
 
 extend google.protobuf.MethodOptions {
-  Operation operation = 000001;
+  Operation operation = 123456789;
 }
 
 // Operation is annotation for rpc that returns longrunning operation, describes
