@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package oci.cloud;
+
+import "google/protobuf/descriptor.proto";
+
+option go_package = "github.com/open-cloud-initiative/specs/gen/go/cloud;cloud";
+
+extend google.protobuf.OneofOptions {
+  bool exactly_one = 123456700;
+}
+
+extend google.protobuf.FieldOptions {
+  bool required = 123456701;
+  string pattern = 123456702;
+  string value = 123456703;
+  string size = 123456704;
+  string length = 123456705;
+  bool unique = 123456706;
+  MapKeySpec map_key = 123456708;
+  string bytes = 123456709;
+}
+
+message MapKeySpec {
+  string value = 1;
+  string pattern = 2;
+  string length = 3;
+}
