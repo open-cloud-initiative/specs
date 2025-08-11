@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package oci.cloud.tags.v1;
+
+import "validation.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/open-cloud-initiative/specs/gen/go/tags/v1;tags";
+
+// A tag.
+message Tag {
+  // The key of the tag.
+  string key = 1 [
+    (required) = true,
+    (length) = "3-254"
+  ];
+
+  // The value of the tag.
+  string value = 2 [
+    (length) = "3-254"
+  ];
+
+  // Creation timestamp.
+  google.protobuf.Timestamp created_at = 3;
+}

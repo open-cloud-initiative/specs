@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+package oci.cloud.tags.v1;
+
+import "google/api/annotations.proto";
+import "google/protobuf/field_mask.proto";
+
+import "api/operation.proto";
+import "tags/v1/tag.proto";
+import "operation/operation.proto";
+import "validation.proto";
+
+option go_package = "github.com/open-cloud-initiative/specs/gen/go/tags/v1;tags";
+
+// A set of methods for managing Tags
+service TagsService {
+  // TagRessource
+  rpc TagRessource (TagResourceRequest) returns (oci.cloud.api.Operation) {
+    option (google.api.http) = { post: "/tags/v1/tag" body: "*" };
+    option (oci.cloud.api.operation) = {
+      metadata: "TagResourceMetadata"
+    };
+  };
+}
+
+message TagResourceMetadata {
+  // List of resource ids.
+  repeated string resource_ids = 1 [
+    (oci.cloud.size) = "<=100",
+    (length) = "<=255",
+    (pattern) = "[a-z0-9][-a-z0-9.]*"
+  ];
+}
+
+message TagResourceRequest {
+  // List of resource ids.
+  repeated string resource_ids = 1 [
+    (oci.cloud.size) = "<=100",
+    (length) = "<=255",
+    (pattern) = "[a-z0-9][-a-z0-9.]*"
+  ];
+
+  // Tags to apply to the resources.
+  repeated Tag tags = 2;
+}
