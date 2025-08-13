@@ -2,8 +2,8 @@ syntax = "proto3";
 
 package oci.cloud.tags.v1;
 
-import "validation.proto";
 import "google/protobuf/timestamp.proto";
+import "validation.proto";
 
 option go_package = "github.com/open-cloud-initiative/specs/gen/go/tags/v1;tags";
 

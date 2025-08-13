@@ -6,20 +6,33 @@ import "google/api/annotations.proto";
 import "google/protobuf/field_mask.proto";
 
 import "api/operation.proto";
-import "tags/v1/tag.proto";
 import "operation/operation.proto";
+import "tags/v1/tag.proto";
 import "validation.proto";
 
 option go_package = "github.com/open-cloud-initiative/specs/gen/go/tags/v1;tags";
 
 // A set of methods for managing Tags
 service TagsService {
-  // TagRessource
+  // TagRessource is tagging a ressource with an existing or new tag.
   rpc TagRessource (TagResourceRequest) returns (oci.cloud.api.Operation) {
     option (google.api.http) = { post: "/tags/v1/tag" body: "*" };
     option (oci.cloud.api.operation) = {
       metadata: "TagResourceMetadata"
     };
+  };
+
+  // UntagRessource is removing a tag from a resource.
+  rpc UntagRessource (TagResourceRequest) returns (oci.cloud.api.Operation) {
+    option (google.api.http) = { delete: "/tags/v1/tag" body: "*" };
+    option (oci.cloud.api.operation) = {
+      metadata: "TagResourceMetadata"
+    };
+  };
+
+  // ListTags is listing all existing tags.
+  rpc ListTags (ListTagsRequest) returns (ListTagsResponse) {
+    option (google.api.http) = { get: "/tags/v1/keys" };
   };
 }
 
@@ -42,4 +55,46 @@ message TagResourceRequest {
 
   // Tags to apply to the resources.
   repeated Tag tags = 2;
+}
+
+message UntagRessource {
+  // List of resource ids.
+  repeated string resource_ids = 1 [
+    (oci.cloud.size) = "<=100",
+    (length) = "<=255",
+    (pattern) = "[a-z0-9][-a-z0-9.]*"
+  ];
+
+  // Tags to remove from the resources.
+  repeated Tag tags = 2;
+}
+
+message ListTagsRequest {
+  // Page size for the request.
+  int32 page_size = 1 [
+    (length) = "<=100"
+  ];
+
+  // Optional pagination token to retrieve the next page of results.
+  string page_token = 2 [
+    (length) = "<=100",
+    (pattern) = "[a-zA-Z0-9_\\-]*"
+  ];
+
+  // Optional filter to apply to the tag keys.
+  string filter = 3 [
+    (length) = "<=100",
+    (pattern) = "[a-zA-Z0-9_\\- ]*"
+  ];
+}
+
+message ListTagsResponse {
+  // List of tags.
+  repeated Tag tags = 1;
+
+  // Optional pagination token to retrieve the next page of results.
+  string next_page_token = 2 [
+    (length) = "<=100",
+    (pattern) = "[a-zA-Z0-9_\\-]*"
+  ];
 }
