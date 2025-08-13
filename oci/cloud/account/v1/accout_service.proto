@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package oci.cloud.account.v1;
+
+import "google/api/annotations.proto";
+import "google/protobuf/field_mask.proto";
+
+import "api/operation.proto";
+import "account/v1/account.proto";
+import "operation/operation.proto";
+import "validation.proto";
+
+option go_package = "github.com/open-cloud-initiative/specs/gen/go/account/v1;account";
+
+// Account service.
+service AccountService {
+  // Get an account by ID
+  rpc GetAccount(GetAccountRequest) returns (GetAccountResponse) {
+    option (google.api.http) = {
+      get: "/v1/accounts/{id}"
+    };
+  }
+}
+
+message GetAccountRequest {
+  // Required. The ID of the account to retrieve.
+  string id = 1 [(required) = true];
+}
+
+message GetAccountResponse {
+  // The account details.
+  Account account = 1;
+}

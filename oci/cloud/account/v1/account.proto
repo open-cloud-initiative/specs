@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package oci.cloud.account.v1;
+
+import "google/protobuf/timestamp.proto";
+import "validation.proto";
+
+option go_package = "github.com/open-cloud-initiative/specs/gen/go/account/v1;account";
+
+// Account
+message Account {
+  // The unique identifier for the account
+  string id = 1;
+  // The name of the account
+  string name = 2;
+  // The email of the account
+  string email = 3;
+  // The creation timestamp of the account
+  google.protobuf.Timestamp created_at = 4;
+  // The last updated timestamp of the account
+  google.protobuf.Timestamp updated_at = 5;
+}
