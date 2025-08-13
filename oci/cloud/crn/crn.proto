@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package oci.cloud.crn;
+
+import "google/api/annotations.proto";
+import "google/protobuf/descriptor.proto";
+
+option go_package = "github.com/open-cloud-initiative/specs/gen/go/crn;crn";
+
+// A CRN respresents a cloud resource.
+message CRN {
+  // canonical means the full representation of the URN.
+  string canonical    = 1;
+  // namespace is the name prefix to space various URN types.
+  string namespace    = 2;
+  // Partition is the cloud provider partition.
+  string partition    = 3;
+  // Service is the cloud service name.
+  string service      = 4;
+  // Region is the cloud region.
+  string region       = 5;
+  // Identifier is the identifier of the resource within a collection.
+  string identifier   = 6;
+  // Resource is the associated resource of the URN.
+  string resource   = 7;
+}
