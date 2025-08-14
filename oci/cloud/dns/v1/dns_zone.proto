@@ -2,8 +2,8 @@ syntax = "proto3";
 
 package oci.cloud.dns.v1;
 
-import "validation.proto";
 import "google/protobuf/timestamp.proto";
+import "validation.proto";
 
 option go_package = "github.com/open-cloud-initiative/specs/gen/go/dns/v1;dns";
 
@@ -44,19 +44,27 @@ message DNSZone {
 // A record set. For details about the concept.
 message RecordSet {
   // Domain name.
-  string name = 1 [(length) = "1-254"];
+  string name = 1 [
+    (oci.cloud.field).string.min_len = 1,
+    (oci.cloud.field).string.max_len = 254
+  ];
 
   // Record type.
-  string type = 2 [(length) = "1-20"];
+  string type = 2 [
+    (oci.cloud.field).string.min_len = 1,
+    (oci.cloud.field).string.max_len = 20
+  ];
 
   // Time to live in seconds.
-  int64 ttl = 3 [(value) = "0-2147483647"];
+  int64 ttl = 3 [
+    (oci.cloud.field).int64.gte = 0
+  ];
 
   // Data of the record set.
   repeated string data = 4 [
-    (size) = "1-100",
-    (length) = "1-255",
-    (unique) = true
+     (oci.cloud.field).repeated.unique = true,
+     (oci.cloud.field).repeated.min_items = 1,
+     (oci.cloud.field).repeated.max_items = 100
   ];
 }
 
@@ -64,9 +72,10 @@ message RecordSet {
 message PrivateVisibility {
   // Network IDs.
   repeated string network_ids = 1 [
-    (size) = "0-100", 
-    (length) = "20",
-    (unique) = true];
+     (oci.cloud.field).repeated.min_items = 0,
+     (oci.cloud.field).repeated.max_items = 100,
+     (oci.cloud.field).repeated.unique = true
+  ];
 }
 
 // Configuration for publicly visible zones.
