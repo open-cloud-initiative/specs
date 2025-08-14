@@ -3,7 +3,6 @@ syntax = "proto3";
 package oci.cloud.tags.v1;
 
 import "google/api/annotations.proto";
-import "google/protobuf/field_mask.proto";
 
 import "api/operation.proto";
 import "operation/operation.proto";
@@ -39,18 +38,18 @@ service TagsService {
 message TagResourceMetadata {
   // List of resource ids.
   repeated string resource_ids = 1 [
-    (oci.cloud.size) = "<=100",
-    (length) = "<=255",
-    (pattern) = "[a-z0-9][-a-z0-9.]*"
+    (oci.cloud.rules).repeated.max_items = 100,
+    (oci.cloud.rules).repeated.items.string.max_len = 255,
+    (oci.cloud.rules).repeated.items.string.pattern = "[a-z0-9][-a-z0-9.]*"
   ];
 }
 
 message TagResourceRequest {
   // List of resource ids.
   repeated string resource_ids = 1 [
-    (oci.cloud.size) = "<=100",
-    (length) = "<=255",
-    (pattern) = "[a-z0-9][-a-z0-9.]*"
+    (oci.cloud.rules).repeated.max_items = 100,
+    (oci.cloud.rules).repeated.items.string.max_len = 255,
+    (oci.cloud.rules).repeated.items.string.pattern = "[a-z0-9][-a-z0-9.]*"
   ];
 
   // Tags to apply to the resources.
@@ -60,9 +59,9 @@ message TagResourceRequest {
 message UntagRessource {
   // List of resource ids.
   repeated string resource_ids = 1 [
-    (oci.cloud.size) = "<=100",
-    (length) = "<=255",
-    (pattern) = "[a-z0-9][-a-z0-9.]*"
+    (oci.cloud.rules).repeated.max_items = 100,
+    (oci.cloud.rules).repeated.items.string.max_len = 255,
+    (oci.cloud.rules).repeated.items.string.pattern = "[a-z0-9][-a-z0-9.]*"
   ];
 
   // Tags to remove from the resources.
@@ -72,19 +71,20 @@ message UntagRessource {
 message ListTagsRequest {
   // Page size for the request.
   int32 page_size = 1 [
-    (length) = "<=100"
+    (oci.cloud.rules).int32.gte = 1,
+    (oci.cloud.rules).int32.lte = 100
   ];
 
   // Optional pagination token to retrieve the next page of results.
   string page_token = 2 [
-    (length) = "<=100",
-    (pattern) = "[a-zA-Z0-9_\\-]*"
+    (oci.cloud.rules).string.max_len = 100,
+    (oci.cloud.rules).string.pattern = "[a-zA-Z0-9_\\-]*"
   ];
 
   // Optional filter to apply to the tag keys.
   string filter = 3 [
-    (length) = "<=100",
-    (pattern) = "[a-zA-Z0-9_\\- ]*"
+    (oci.cloud.rules).string.max_len = 100,
+    (oci.cloud.rules).string.pattern = "[a-zA-Z0-9_\\- ]*"
   ];
 }
 
@@ -94,7 +94,7 @@ message ListTagsResponse {
 
   // Optional pagination token to retrieve the next page of results.
   string next_page_token = 2 [
-    (length) = "<=100",
-    (pattern) = "[a-zA-Z0-9_\\-]*"
+    (oci.cloud.rules).string.max_len = 100,
+    (oci.cloud.rules).string.pattern = "[a-zA-Z0-9_\\-]*"
   ];
 }

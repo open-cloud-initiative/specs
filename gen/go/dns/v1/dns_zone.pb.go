@@ -7,7 +7,7 @@
 package dns
 
 import (
-	_ "github.com/open-cloud-initiative/specs/gen/go/cloud"
+	_ "github.com/open-cloud-initiative/specs/gen/go"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"

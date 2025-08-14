@@ -122,7 +122,7 @@ message GetDNSZoneRequest {
   // ID of the DNS zone to return.
   //
   // To get a DNS zone ID, make a [DNSZoneService.List] request.
-  string dns_zone_id = 1 [(required) = true];
+  string dns_zone_id = 1 [(oci.cloud.rules).message.required = true];
 }
 
 message ListDNSZonesRequest {
@@ -168,7 +168,7 @@ message CreateDNSZoneRequest {
   map<string, string> tags = 4 [(oci.cloud.size) = "<=64", (length) = "<=63", (pattern) = "[-_./\\@0-9a-z]*", (map_key).length = "1-63", (map_key).pattern = "[a-z][-_./\\@0-9a-z]*"];
   
   // DNS zone suffix.
-  string zone = 5 [(required) = true, (length) = "<=255", (pattern) = "[.]|[a-z0-9][-a-z0-9.]*\\."];
+  string zone = 5 [(oci.cloud.rules).message.required = true, (length) = "<=255", (pattern) = "[.]|[a-z0-9][-a-z0-9.]*\\."];
 
   // Privately visible zone settings. 
   // At least one of two visibility fields must be set.
@@ -246,10 +246,16 @@ message GetDNSZoneRecordSetRequest {
   string dns_zone_id = 1 [(length) = "20"];
 
   // Name of the record set.
-  string name = 2 [(required) = true, (length) = "<=255"];
+  string name = 2 [
+    (oci.cloud.rules).message.required = true,
+    (length) = "<=255"
+  ];
 
   // Type of the record set.
-  string type = 3 [(required) = true, (length) = "<=10"];
+  string type = 3 [
+    (oci.cloud.rules).message.required = true,
+    (length) = "<=10"
+  ];
 }
 
 message ListDNSZoneRecordSetsRequest {
