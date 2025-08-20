@@ -13,7 +13,7 @@ option go_package = "github.com/open-cloud-initiative/specs/gen/go/sts/v1;sts";
 service STSService {
   // Returns a token
   rpc Token (TokenRequest) returns (TokenResponse) {
-    option (google.api.http) = { post: "/dns/v1/token" body: "*"};
+    option (google.api.http) = { post: "/sts/v1/token" body: "*"};
   };
 }
 
