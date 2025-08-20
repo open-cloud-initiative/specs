@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package oci.cloud.sts.v1;
+
+import "google/api/annotations.proto";
+import "google/protobuf/field_mask.proto";
+
+import "validation.proto";
+
+option go_package = "github.com/open-cloud-initiative/specs/gen/go/sts/v1;sts";
+
+// A set of methods for managing security tokens.
+service STSService {
+  // Returns a token
+  rpc Token (TokenRequest) returns (TokenResponse) {
+    option (google.api.http) = { post: "/dns/v1/token" body: "*"};
+  };
+}
+
+// TokenRequest is the request message for the Token RPC.
+message TokenRequest {
+  string grant_type           = 1;
+  string audience             = 2;
+  string scope                = 3;
+  string request_token_type   = 4;
+  string subject_token        = 5;
+  string subject_token_type   = 6;
+  string options              = 7;
+}
+
+// TokenResponse contains the response message for the Token RPC.
+message TokenResponse {
+  string access_token                 = 1;
+  string issues_token_type            = 2;
+  string token_type                   = 3;
+  int64 expires_in                    = 4;
+  bytes access_boundary_session_key   = 5;
+}
