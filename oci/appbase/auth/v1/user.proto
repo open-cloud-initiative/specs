@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+package oci.appbase.auth.v1;
+
+import "google/api/annotations.proto";
+import "operation/operation.proto";
+import "appbase/auth/v1/mfa_factor.proto";
+import "appbase/auth/v1/identity.proto";
+
+option go_package = "github.com/open-cloud-initiative/specs/gen/go/appbase/auth/v1;auth";
+
+// User represents a user in the system.
+message User {
+  // Id of the user.
+  string id = 1;
+  // Role is the role of the user.
+  string role = 2;
+  // Email is the email of the user.
+  string email = 3;
+  // Email verified at.
+  google.protobuf.Timestamp email_verified_at = 4;
+  // Phone number of the user.
+  string phone_number = 5;
+  // Phone number verified at.
+  google.protobuf.Timestamp phone_number_verified_at = 6;
+  // Confirmation at.
+  google.protobuf.Timestamp confirmed_at = 7;
+  // Confirmation send at.
+  google.protobuf.Timestamp confirmation_sent_at = 8;
+  // Reauthentication at.
+  google.protobuf.Timestamp reauthenticated_at = 9;
+  // Last signed in at.
+  google.protobuf.Timestamp last_signed_in_at = 10;
+  // App metadata.
+  map<string, string> app_metadata = 11;
+  // User metadata.
+  map<string, string> user_metadata = 12;
+  // Banned until.
+  google.protobuf.Timestamp banned_until = 13;
+  // Created at.
+  google.protobuf.Timestamp created_at = 14;
+  // Updated at.
+  google.protobuf.Timestamp updated_at = 15;
+  // Deleted at.
+  google.protobuf.Timestamp deleted_at = 16;
+  // Is anonymous.
+  bool is_anonymous = 17;
+  // Identities.
+  repeated Identity identities = 18;
+  // MFA factors.
+  repeated MFAFactor mfa_factors = 19;
+}
+
+

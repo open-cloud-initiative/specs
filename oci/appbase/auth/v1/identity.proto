@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package oci.appbase.auth.v1;
+
+import "google/api/annotations.proto";
+import "operation/operation.proto";
+
+option go_package = "github.com/open-cloud-initiative/specs/gen/go/appbase/auth/v1;auth";
+
+// Identity
+message Identity {
+  // Id of the identity.
+  string id = 1;
+  // User id of the identity.
+  string user_id = 2;
+  // Identity data.
+  map<string, string> data = 3;
+  // Provider.
+  string provider = 4;
+  // Last signed in at.
+  google.protobuf.Timestamp last_signed_in_at = 5;
+  // Created at.
+  google.protobuf.Timestamp created_at = 6;
+  // Updated at.
+  google.protobuf.Timestamp updated_at = 7;
+  // Deleted at.
+  google.protobuf.Timestamp deleted_at = 8;
+  // Email.
+  string email = 8;
+}

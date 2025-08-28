@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+package oci.appbase.auth.v1;
+
+import "google/api/annotations.proto";
+import "operation/operation.proto";
+
+option go_package = "github.com/open-cloud-initiative/specs/gen/go/appbase/auth/v1;auth";
+
+// Multi Factor
+message MFAFactor {
+  // Id.
+  string id = 1;
+  // Status.
+  MFAFactorStatus status = 2;
+  // Type.
+  MFAFactorType type = 3;
+  // Friendly name.
+  string friendly_name = 4;
+  // Web Authn credentials.
+  bytes web_authn_credential = 5;
+  // Phone number.
+  string phone_number = 6;
+  // Last challenged at.
+  google.protobuf.Timestamp last_challenged_at = 7;
+  // Created at.
+  google.protobuf.Timestamp created_at = 8;
+  // Updated at.
+  google.protobuf.Timestamp updated_at = 9;
+  // Deleted at.
+  google.protobuf.Timestamp deleted_at = 10;
+}
+
+// MFAFactorStatus is an enum to represent the current state.
+enum MFAFactorStatus {
+  // Unspecified is an unspecified state.
+  MFA_FACTOR_STATUS_UNSPECIFIED = 0;
+  // The factor is in the process of being verified.
+  MFA_FACTOR_STATUS_PENDING = 1;
+  // The factor has been verified.
+  MFA_FACTOR_STATUS_VERIFIED = 2;
+  // The factor has been rejected.
+  MFA_FACTOR_STATUS_UNVERIFIED = 3;
+}
+
+// MFAFactorType is an enum of the allowed types.
+enum MFAFactorType {
+  // Unspecified is an unspecified type.
+  FACTOR_TYPE_UNSPECIFIED = 0;
+  // The factor is a time-based one-time password.
+  FACTOR_TYPE_TOTP = 1;
+  // The factor is a biometric.
+  FACTOR_TYPE_BIOMETRIC = 2;
+  // The factor is a hardware token.
+  FACTOR_TYPE_HARDWARE_TOKEN = 3;
+}
