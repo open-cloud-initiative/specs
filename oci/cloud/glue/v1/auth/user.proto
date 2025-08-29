@@ -1,13 +1,14 @@
 syntax = "proto3";
 
-package oci.appbase.auth.v1;
+package oci.cloud.glue.v1.auth;
 
 import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
 import "operation/operation.proto";
-import "appbase/auth/v1/mfa_factor.proto";
-import "appbase/auth/v1/identity.proto";
+import "glue/v1/auth/mfa_factor.proto";
+import "glue/v1/auth/identity.proto";
 
-option go_package = "github.com/open-cloud-initiative/specs/gen/go/appbase/auth/v1;auth";
+option go_package = "github.com/open-cloud-initiative/specs/gen/go/glue/v1/auth;auth";
 
 // User represents a user in the system.
 message User {

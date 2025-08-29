@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package oci.cloud.glue.v1.auth;
+
+import "google/api/annotations.proto";
+import "google/protobuf/field_mask.proto";
+
+import "account/v1/account.proto";
+import "api/operation.proto";
+import "operation/operation.proto";
+import "validation.proto";
+
+option go_package = "github.com/open-cloud-initiative/specs/gen/go/glue/v1/auth;auth";
+
+// Authentication service.
+service AuthService {
+  rpc Logout (LogoutRequest) returns (oci.cloud.api.Operation) {
+    option (google.api.http) = {
+      post: "/glue/v1/auth/logout"
+      body: "*"
+    };
+    option (oci.cloud.api.operation) = {
+      metadata: "LogoutMetadata"
+    };
+  };
+}
+
+// Logout
+message LogoutRequest {
+  string user_id = 1;
+}
+
+// LogoutMetadata
+message LogoutMetadata {
+  string user_id = 1;
+}

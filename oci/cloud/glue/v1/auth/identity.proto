@@ -1,11 +1,12 @@
 syntax = "proto3";
 
-package oci.appbase.auth.v1;
-
+package oci.cloud.glue.v1.auth;
+  
 import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
 import "operation/operation.proto";
 
-option go_package = "github.com/open-cloud-initiative/specs/gen/go/appbase/auth/v1;auth";
+option go_package = "github.com/open-cloud-initiative/specs/gen/go/glue/v1/auth;auth";
 
 // Identity
 message Identity {
@@ -26,5 +27,5 @@ message Identity {
   // Deleted at.
   google.protobuf.Timestamp deleted_at = 8;
   // Email.
-  string email = 8;
+  string email = 9;
 }

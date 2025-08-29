@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package oci.cloud.glue.v1.auth;
+
+import "google/api/annotations.proto";
+import "operation/operation.proto";
+
+option go_package = "github.com/open-cloud-initiative/specs/gen/go/glue/v1/auth;auth";
+
+// GrantType defines the type of grant being requested.
+enum GrantType {
+  GRANT_TYPE_UNSPECIFIED = 0;
+  GRANT_TYPE_PASSWORD = 1;
+  GRANT_TYPE_ID_TOKEN = 2;
+  GRANT_TYPE_PKCE = 3;
+}
